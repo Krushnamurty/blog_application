@@ -1,0 +1,41 @@
+{% extends "blog/base.html" %}
+{% block title %}Share a post {% endblock %}
+
+{% block content %}
+{% if sent %}
+  <h1>E-mail successfully sent</h1>
+  <div class="alert alert-success">
+    "{{post.title}}" was successfully sent to {{form.cleaned_data.to }}.
+  </div>
+{% else %}
+<div class="jumbotron"><h1>Share "{{post.title}}" by e-mail</h1></div>
+<form action="." method="post">
+  <div class="form-group row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-10">
+      {{form.name}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      {{form.email}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">To</label>
+    <div class="col-sm-10">
+      {{form.to}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">Comments</label>
+    <div class="col-sm-10">
+      {{form.comments}}
+    </div>
+  </div>
+  {% csrf_token %}
+  <button type="submit" class="btn btn-success" >Send e-mail</button>
+</form>
+{% endif %}
+{% endblock %}
